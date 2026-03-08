@@ -121,3 +121,12 @@ dist/protocol.schema.json
 
 # Synthing
 **/.stfolder/
+
+
+自定义
+/huggingface-new
+/huggingface-GitHubActions/工作流指引1.md
+/huggingface-GitHubActions/工作流指引2.md
+/huggingface-GitHubActions/工作流指引3.md
+/huggingface-GitHubActions/工作流指引4.md
+/huggingface-GitHubActions/构建日志.MD
