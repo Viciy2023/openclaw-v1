@@ -27,7 +27,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: viciy2023/openclaw-clawmate
+          images: viciy2026/openclaw-viciy2026
           tags: |
             type=raw,value=latest
             type=sha,prefix={{date 'YYYYMMDD'}}-

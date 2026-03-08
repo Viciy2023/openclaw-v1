@@ -34,7 +34,7 @@ echo ""
 
 # 步骤 2：检查预构建镜像是否存在
 echo "步骤 2/4: 检查预构建镜像..."
-if docker pull "$DOCKERHUB_USERNAME/openclaw-clawmate:latest" 2>/dev/null; then
+if docker pull "$DOCKERHUB_USERNAME/openclaw-viciy2026:latest" 2>/dev/null; then
     echo "✅ 预构建镜像已存在"
 else
     echo "⚠️  预构建镜像不存在"
