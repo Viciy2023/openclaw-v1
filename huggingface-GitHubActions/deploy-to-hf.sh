@@ -12,7 +12,7 @@ echo ""
 
 # 检查是否在正确的目录
 if [ ! -f "Dockerfile-hf" ]; then
-    echo "错误：请在 huggingface-new 目录下运行此脚本"
+    echo "错误：请在 huggingface-GitHubActions 目录下运行此脚本"
     exit 1
 fi
 
