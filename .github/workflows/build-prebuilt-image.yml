@@ -37,7 +37,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
-          file: ./huggingface-new/Dockerfile-prebuilt
+          file: ./huggingface-GitHubActions/Dockerfile-prebuilt
           platforms: linux/amd64
           push: true
           tags: ${{ steps.meta.outputs.tags }}
