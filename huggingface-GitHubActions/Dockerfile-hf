@@ -9,8 +9,8 @@ FROM viciy2023/openclaw-clawmate:latest
 # 切换到 root 用户（需要下载文件和修改权限）
 USER root
 
-# 复制 entrypoint.sh（从仓库根目录的 huggingface-new 目录）
-COPY huggingface-new/entrypoint.sh-supabase /entrypoint.sh
+# 复制 entrypoint.sh（假设已在 HF Spaces 部署目录中）
+COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
 # 暴露端口
