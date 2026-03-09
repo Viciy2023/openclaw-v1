@@ -18,8 +18,9 @@ RUN corepack enable
 
 WORKDIR /app
 
-# 3. 克隆 OpenClaw 官方代码
-RUN git clone --depth 1 https://github.com/openclaw/openclaw.git .
+# 3. 克隆 OpenClaw 官方代码（指定版本 2026.3.1）
+RUN git clone --depth 1 --branch v2026.3.1 https://github.com/openclaw/openclaw.git . || \
+    (git clone https://github.com/openclaw/openclaw.git . && git checkout v2026.3.1)
 
 # 4. 安装依赖（最耗时：~15分钟）
 RUN pnpm install --no-frozen-lockfile
@@ -33,16 +34,13 @@ RUN pnpm build || pnpm build --no-typecheck || (echo "Build with errors, continu
 ENV OPENCLAW_PREFER_PNPM=1
 RUN pnpm ui:build || (echo "UI build with errors, continuing..." && exit 0)
 
-# 7. 安装 ClawMate 基础插件（耗时：~2分钟）
-RUN git clone --depth 1 https://github.com/BytePioneer-AI/clawmate.git /tmp/clawmate \
-    && mkdir -p /root/.openclaw/extensions \
-    && cp -r /tmp/clawmate/packages/clawmate-companion /root/.openclaw/extensions/clawmate-companion \
-    && cd /root/.openclaw/extensions/clawmate-companion \
-    && npm install --omit=dev --no-audit --no-fund \
-    && rm -rf /tmp/clawmate
+# 7. 安装 openclaw-china 插件（官方版本）
+RUN node openclaw.mjs plugins install @openclaw-china/channels || echo "openclaw-china plugin install attempted" \
+    && node openclaw.mjs china setup || echo "openclaw china setup attempted" \
+    && node openclaw.mjs plugins update channels || echo "openclaw plugins update channels attempted"
 
-# 8. 安装 openclaw-china 插件（使用官方版本）
-RUN node openclaw.mjs plugins install @openclaw-china/channels || echo "openclaw-china plugin install attempted"
+# 8. 安装 ClawMate 基础插件（使用 npx）
+RUN npx github:BytePioneer-AI/clawmate || echo "ClawMate installation attempted"
 
 # ============================================================
 # Stage 2: Runtime Stage

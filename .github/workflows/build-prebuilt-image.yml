@@ -29,6 +29,7 @@ jobs:
         with:
           images: viciy2026/openclaw-viciy2026
           tags: |
+            type=raw,value=2026.3.1
             type=raw,value=latest
             type=sha,prefix={{date 'YYYYMMDD'}}-
             type=ref,event=branch
