@@ -82,7 +82,6 @@ apps/ios/*.mobileprovision
 .local/
 docs/.local/
 IDENTITY.md
-USER.md
 .tgz
 .idea
 
@@ -124,9 +123,48 @@ dist/protocol.schema.json
 
 
 自定义
-/huggingface-new
 /huggingface-GitHubActions/工作流指引1.md
 /huggingface-GitHubActions/工作流指引2.md
 /huggingface-GitHubActions/工作流指引3.md
 /huggingface-GitHubActions/工作流指引4.md
 /huggingface-GitHubActions/构建日志.MD
+/huggingface-GitHubActions/HF-DEPLOY-GUIDE.md
+/huggingface-GitHubActions/entrypoint.sh-supabase
+/huggingface-GitHubActions/entrypoint.sh-supabase-debug
+/clawmate-main-自我修改版
+
+# huggingface-new 敏感文件
+huggingface-new/
+huggingface-new/.env
+huggingface-new/.env.*
+huggingface-new/备份env
+huggingface-new/运行日志.MD
+huggingface-new/构建日志.MD
+huggingface-new/characters/*/reference.png
+huggingface-new/characters/*/images/
+#huggingface-new/WORKFLOW_AUTO.md
+huggingface-new/TOOLS.md
+#huggingface-new/task-dispatch.md
+huggingface-new/start-openclaw.sh
+# huggingface-new/SOUL.md
+huggingface-new/README.md
+huggingface-new/openclaw.json*
+# huggingface-new/*.md
+huggingface-new/Dockerfile*
+huggingface-new/entrypoint.sh*
+#huggingface-new/characters/maggie
+#huggingface-new/cron
+# huggingface-new/patches/clawmate/SKILL*.md
+huggingface-new/patches/clawmate/视频生成实现方案.md
+huggingface-new/patches/sync-from-clawmate.ps1
+grok2api-main
+huggingface-new/patches/clawmate/DEPLOYMENT_CHECKLIST.md
+huggingface-new/patches/clawmate/IMPLEMENTATION_SUMMARY.md
+huggingface-new/AGENTS.md
+huggingface-new/BOOTSTRAP.md
+huggingface-new/FINAL_SUMMARY.md
+huggingface-new/HEARTBEAT.md
+huggingface-new/MEMORY.md
+huggingface-new/SUPABASE_UPLOAD_LIST.md
+huggingface-new/UPLOAD_TO_SUPABASE.md
+#USER.md
