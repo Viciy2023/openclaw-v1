@@ -1,0 +1,58 @@
+{
+  "id": "qqbot",
+  "name": "QQ Bot",
+  "description": "QQ 开放平台机器人消息渠道插件",
+  "version": "0.1.0",
+  "channels": ["qqbot"],
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "enabled": { "type": "boolean" },
+      "appId": { "type": ["string", "number"] },
+      "clientSecret": { "type": "string" },
+      "asr": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "enabled": { "type": "boolean" },
+          "appId": { "type": ["string", "number"] },
+          "secretId": { "type": "string" },
+          "secretKey": { "type": "string" }
+        }
+      },
+      "markdownSupport": { "type": "boolean" },
+      "c2cMarkdownDeliveryMode": {
+        "type": "string",
+        "enum": ["passive", "proactive-table-only", "proactive-all"]
+      },
+      "dmPolicy": { "type": "string", "enum": ["open", "pairing", "allowlist"] },
+      "groupPolicy": { "type": "string", "enum": ["open", "allowlist", "disabled"] },
+      "requireMention": { "type": "boolean" },
+      "allowFrom": { "type": "array", "items": { "type": "string" } },
+      "groupAllowFrom": { "type": "array", "items": { "type": "string" } },
+      "historyLimit": { "type": "integer", "minimum": 0 },
+      "textChunkLimit": { "type": "integer", "minimum": 1 },
+      "replyFinalOnly": { "type": "boolean" },
+      "longTaskNoticeDelayMs": { "type": "integer", "minimum": 0 },
+      "maxFileSizeMB": { "type": "number", "exclusiveMinimum": 0 },
+      "mediaTimeoutMs": { "type": "integer", "minimum": 1 },
+      "autoSendLocalPathMedia": { "type": "boolean" },
+      "inboundMedia": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "dir": { "type": "string" },
+          "keepDays": { "type": "number", "minimum": 0 }
+        }
+      }
+    }
+  },
+  "uiHints": {
+    "appId": { "label": "App ID" },
+    "clientSecret": { "label": "Client Secret", "sensitive": true },
+    "asr.appId": { "label": "ASR App ID" },
+    "asr.secretId": { "label": "ASR Secret ID", "sensitive": true },
+    "asr.secretKey": { "label": "ASR Secret Key", "sensitive": true }
+  }
+}
