@@ -1,0 +1,243 @@
+{
+  "gateway": {
+    "mode": "local",
+    "bind": "lan",
+    "auth": {
+      "mode": "token",
+      "token": "__GATEWAY_TOKEN__"
+    },
+    "controlUi": {
+      "dangerouslyDisableDeviceAuth": true,
+      "allowInsecureAuth": true,
+      "dangerouslyAllowHostHeaderOriginFallback": true
+    },
+    "http": {
+      "endpoints": {
+        "chatCompletions": {
+          "enabled": true
+        }
+      }
+    }
+  },
+  "cron": {
+    "enabled": true
+  },
+  "tools": {
+    "exec": {
+      "security": "full",
+      "ask": "off"
+    }
+  },
+  "models": {
+    "mode": "merge",
+    "providers": {
+      "GrokProxy_hf": {
+        "baseUrl": "__GROKPROXY_BASE_URL__",
+        "apiKey": "__GROKPROXY_API_KEY__",
+        "api": "openai-completions",
+        "models": [
+          {
+            "id": "grok-4.20-beta",
+            "name": "GROK-4.20-BETA",
+            "reasoning": false,
+            "input": ["text"],
+            "cost": { "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0 },
+            "contextWindow": 128000,
+            "maxTokens": 16384
+          }
+        ]
+      }
+    }
+  },
+  "agents": {
+    "defaults": {
+      "model": {
+        "primary": "GrokProxy_hf/grok-4.20-beta"
+      },
+      "models": {
+        "GrokProxy_hf/grok-4.20-beta": {}
+      },
+      "workspace": "/root/.openclaw/workspace",
+      "compaction": {
+        "mode": "safeguard"
+      },
+      "bootstrapMaxChars": 50000,
+      "maxConcurrent": 4,
+      "timeoutSeconds": 300,
+      "subagents": {
+        "maxConcurrent": 8
+      }
+    }
+  },
+  "messages": {
+    "ackReactionScope": "group-mentions"
+  },
+  "commands": {
+    "native": "auto",
+    "nativeSkills": "auto"
+  },
+  "session": {
+    "dmScope": "per-channel-peer"
+  },
+  "hooks": {
+    "internal": {
+      "enabled": true,
+      "entries": {
+        "boot-md": { "enabled": true },
+        "bootstrap-extra-files": { "enabled": true },
+        "command-logger": { "enabled": true },
+        "session-memory": { "enabled": true }
+      }
+    }
+  },
+  "plugins": {
+    "entries": {
+      "channels": {
+        "enabled": true
+      },
+      "clawmate-companion": {
+        "enabled": true,
+        "config": {
+          "selectedCharacter": "kefei",
+          "defaultProvider": "groksougou",
+          "providers": {
+            "grokcf": {
+              "type": "openai-compatible",
+              "apiKey": "__HFOPCF_GROK2API_KEY__",
+              "model": "grok-imagine-1.0-edit",
+              "baseUrl": "__HFOPCF_GROK2API_BASE_URL__",
+              "timeoutMs": 120000
+            },
+            "groksougou": {
+              "type": "openai-compatible",
+              "apiKey": "__HFOPSOUGOU_GROK2API_KEY__",
+              "model": "grok-imagine-1.0-edit",
+              "baseUrl": "__HFOPSOUGOU_GROK2API_BASE_URL__",
+              "timeoutMs": 120000
+            },
+            "grokqq": {
+              "type": "openai-compatible",
+              "apiKey": "__HFOPQQ_GROK2API_KEY__",
+              "model": "grok-imagine-1.0-edit",
+              "baseUrl": "__HFOPQQ_GROK2API_BASE_URL__",
+              "timeoutMs": 120000
+            },
+            "grokkuake": {
+              "type": "openai-compatible",
+              "apiKey": "__HFOPKUAKE_GROK2API_KEY__",
+              "model": "grok-imagine-1.0-edit",
+              "baseUrl": "__HFOPKUAKE_GROK2API_BASE_URL__",
+              "timeoutMs": 120000
+            },
+            "volcengine": {
+              "type": "volcengine",
+              "apiKey": "__VOLCENGINE_ARK_API_KEY__",
+              "model": "doubao-seedream-4-5-251128",
+              "baseUrl": "__VOLCENGINE_PROXY_URL__",
+              "headers": {
+                "x-proxy-token": "__VOLCENGINE_PROXY_TOKEN__"
+              }
+            },
+            "grokvideosougou": {
+              "type": "openai-compatible",
+              "apiKey": "__HFOPVIDEOSOUGOU_GROK_API_KEY__",
+              "model": "grok-imagine-1.0-video",
+              "baseUrl": "__HFOPVIDEOSOUGOU_GROK_BASE_URL__",
+              "timeoutMs": 300000
+            },
+            "grokimaginesougou": {
+              "type": "openai-compatible",
+              "apiKey": "__HFOPIMAGINESOUGOU_GROK_API_KEY__",
+              "model": "grok-imagine-1.0",
+              "baseUrl": "__HFOPIMAGINESOUGOU_GROK_BASE_URL__",
+              "timeoutMs": 120000
+            }
+          },
+          "proactiveSelfie": {
+            "enabled": true,
+            "probability": 0.3
+          },
+          "fallback": { "enabled": true, "order": ["groksougou","grokqq", "grokcf","grokkuake", "volcengine"] },
+          "videoProvider": "grokvideosougou",
+          "fastProvider": "grokimaginesougou",
+          "retry": { "maxAttempts": 4, "backoffMs": 1500 }
+        }
+      }
+    }
+  },
+  "channels": {
+    "wecom": {
+      "enabled": true,
+      "mode": "ws",
+      "botId": "__WECOM_WS_BOT_ID__",
+      "secret": "__WECOM_WS_SECRET__",
+      "publicBaseUrl": "__PUBLIC_BASE_URL__",
+      "heartbeatIntervalMs": 30000,
+      "reconnectInitialDelayMs": 2000,
+      "webhookPath": "/wecom",
+      "token": "__WECOM_TOKEN__",
+      "encodingAESKey": "__WECOM_AES_KEY__",
+      "corpId": "__WECOM_CORP_ID__",
+      "dmPolicy": "open",
+      "groupPolicy": "open",
+      "requireMention": true,
+      "allowFrom": ["*"]
+    },
+    "wecom-app": {
+      "enabled": true,
+      "webhookPath": "/wecom-app",
+      "token": "__WECOM_APP_TOKEN__",
+      "encodingAESKey": "__WECOM_APP_AES_KEY__",
+      "corpId": "__WECOM_CORP_ID__",
+      "corpSecret": "__WECOM_APP_SECRET__",
+      "agentId": 1000008,
+      "dmPolicy": "open",
+      "allowFrom": ["*"],
+      "apiBaseUrl": "__WECOM_APP_API_BASE_URL__",
+      "inboundMedia": {
+        "enabled": true,
+        "maxBytes": 10485760,
+        "keepDays": 7
+      },
+      "voiceTranscode": {
+        "enabled": true,
+        "prefer": "amr"
+      },
+      "asr": {
+        "enabled": true,
+        "appId": "__WECOM_APP_ASR_APP_ID__",
+        "secretId": "__WECOM_APP_ASR_SECRET_ID__",
+        "secretKey": "__WECOM_APP_ASR_SECRET_KEY__"
+      }
+    },
+    "qqbot": {
+      "enabled": true,
+      "appId": "__QQBOT_APP_ID__",
+      "clientSecret": "__QQBOT_CLIENT_SECRET__",
+      "markdownSupport": true,
+      "c2cMarkdownDeliveryMode": "proactive-all",
+      "autoSendLocalPathMedia": true,
+      "longTaskNoticeDelayMs": 30000,
+      "dmPolicy": "open",
+      "groupPolicy": "open",
+      "requireMention": true,
+      "allowFrom": ["*"],
+      "textChunkLimit": 1500,
+      "replyFinalOnly": false,
+      "asr": {
+        "enabled": true,
+        "appId": "__QQBOT_ASR_APP_ID__",
+        "secretId": "__QQBOT_ASR_SECRET_ID__",
+        "secretKey": "__QQBOT_ASR_SECRET_KEY__"
+      }
+    },
+    "feishu-china": {
+      "enabled": true,
+      "appId": "__FEISHU_APP_ID__",
+      "appSecret": "__FEISHU_APP_SECRET__",
+      "verificationToken": "__FEISHU_VERIFICATION_TOKEN__",
+      "encryptKey": "__FEISHU_ENCRYPT_KEY__",
+      "sendMarkdownAsCard": true
+    }
+  }
+}
